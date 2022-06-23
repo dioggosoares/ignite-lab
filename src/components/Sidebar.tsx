@@ -12,7 +12,6 @@ const GET_LESSONS_QUERY = gql`
     }
   }
 `
-
 interface GetLessonsQueryResponse {
   lessons: {
     id: string;
@@ -32,7 +31,7 @@ export function Sidebar() {
         Cronograma de aulas
       </span>
 
-      <div className="flex flex-col">
+      <div id="listLessons" className="flex flex-col">
         {data?.lessons.map(lesson => {
           return (
             <Lesson

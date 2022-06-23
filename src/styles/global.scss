@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gray-900 text-gray-100;
+  -webkit-font-smoothing: antialiased;
+  overflow-y: auto;
+}
+
+#listLessons {
+  a {
+    &.active {
+      @apply text-white bg-green-500;
+    }
+
+    &.active::before {
+      position: absolute;
+      content: "";
+      transform: rotate(90deg);
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 12px solid #00875f;
+      margin-top: 3.9375rem;
+      margin-left: -0.9375rem;
+    }
+  }
+}

@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { Link, NavLink } from 'react-router-dom'
 import { isPast, format } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
 import { CheckCircle, Lock } from 'phosphor-react'
@@ -15,17 +17,19 @@ export function Lesson({ title, slug, availableAt, type }: LessonsProps) {
     locale: ptBR,
   })
 
+  const [active, setActive] = useState(true)
+
   return (
     <>
       <span className="text-gray-300">
         {availableDateFormat}
       </span>
       {isLessonAvailable ? (
-        <button type="button" className="rounded-md border border-gray-500 cursor-pointer mb-8 mt-2
-        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-600 focus:ring-green-500">
-          <div className="p-4">
+        <NavLink to={`/classroom/lesson/${slug}`} className="group rounded-md border border-gray-500 cursor-pointer mb-8 mt-2 hover:border-green-500 
+        active:bg-green-500">
+          <div id="contentLink" className="p-4">
             <header className="flex items-center justify-between">
-              <span className="flex items-center gap-2 text-sm text-blue-500 font-medium">
+              <span className="flex items-center gap-2 text-sm text-blue-500 font-medium group-active:text-white">
                 <CheckCircle size={20} />
                 Conteúdo liberado
               </span>
@@ -39,10 +43,9 @@ export function Lesson({ title, slug, availableAt, type }: LessonsProps) {
               {title}
             </strong>
           </div>
-        </button>
+        </NavLink>
       ) : (
-        <button type="button" className="rounded-md border border-gray-500 cursor-not-allowed mb-8 mt-2
-        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-600 focus:ring-blue-500 opacity-30" disabled>
+        <a href="#" className="rounded-md border border-gray-500 cursor-not-allowed mb-8 mt-2 hover:not:border-green-500 focus:outline-none opacity-30">
           <div className="p-4">
             <header className="flex items-center justify-between">
               <span className="flex items-center gap-2 text-sm text-orange-500 font-medium">
@@ -59,7 +62,7 @@ export function Lesson({ title, slug, availableAt, type }: LessonsProps) {
               {title}
             </strong>
           </div>
-        </button>
+        </a>
       )}
     </>
   )

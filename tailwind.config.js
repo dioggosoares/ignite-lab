@@ -2,6 +2,12 @@
 module.exports = {
   mode: 'jit',
   content: ['./src/**/*.tsx'],
+  variants: {
+    extend: {
+      backgroundColor: ['active'],
+      textColor: ['group-active'],
+    }
+  },
   theme: {
     extend: {
       fontFamily: {
