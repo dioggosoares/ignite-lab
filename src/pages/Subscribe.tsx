@@ -10,6 +10,9 @@ import { Footer } from "../components/Footer";
 import { Loading } from "../components/Loading";
 import { Logo } from "../components/Logo";
 
+// IMPORT STATIC IMAGE
+import codeMockup from '../assets/code-mockup.png';
+
 export function Subscribe() {
   const navigate = useNavigate()
 
@@ -79,7 +82,7 @@ export function Subscribe() {
         </div>
       </div>
 
-      <img src="/src/assets/code-mockup.png" className="mt-10" alt="" />
+      <img src={codeMockup} className="mt-10" alt="" />
       <section id="footer" className="flex w-full bg-gray-900 items-center justify-center px-8">
         <Footer />
       </section>
