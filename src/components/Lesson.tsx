@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useParams } from 'react-router-dom'
 import { isPast, format } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
 import { CheckCircle, Lock } from 'phosphor-react'
+import classNames from 'classnames'
 
 interface LessonsProps {
   title: string;
@@ -12,12 +12,13 @@ interface LessonsProps {
 }
 
 export function Lesson({ title, slug, availableAt, type }: LessonsProps) {
+  const { slugParam } = useParams<{ slugParam: string }>()
   const isLessonAvailable = isPast(availableAt);
   const availableDateFormat = format(availableAt, "EEEE' • 'd' de 'MMMM' • 'k'h'mm", {
     locale: ptBR,
   })
 
-  const [active, setActive] = useState(true)
+  const isActiveLesson = slugParam === slug
 
   return (
     <>
@@ -25,21 +26,32 @@ export function Lesson({ title, slug, availableAt, type }: LessonsProps) {
         {availableDateFormat}
       </span>
       {isLessonAvailable ? (
-        <NavLink to={`/classroom/lesson/${slug}`} className="group rounded-md border border-gray-500 cursor-pointer mb-8 mt-2 hover:border-green-500 
-        active:bg-green-500">
-          <div id="contentLink" className="p-4">
+        <NavLink to={`/classroom/lesson/${slug}`} className="group">
+          <div id="infoLink" className={classNames('rounded-md border border-gray-500 cursor-pointer p-4 mb-8 mt-2 group-hover:border-green-500', {
+            'bg-green-500': isActiveLesson,
+            'active': isActiveLesson
+          })}>
             <header className="flex items-center justify-between">
-              <span className="flex items-center gap-2 text-sm text-blue-500 font-medium group-active:text-white">
+              <span className={classNames('flex items-center gap-2 text-sm font-medium', {
+                'text-white': isActiveLesson,
+                'text-blue-500': !isActiveLesson,
+              })}>
                 <CheckCircle size={20} />
                 Conteúdo liberado
               </span>
 
-              <span className="text-xs rounded py-[.125rem] px-2 text-white border border-green-300">
+              <span className={classNames('text-xs rounded py-[.125rem] px-2 text-white border', {
+                'border-white': isActiveLesson,
+                'border-green-300': !isActiveLesson,
+              })}>
                 {type === 'live' ? 'AO VIVO' : 'AULA PRÁTICA'}
               </span>
             </header>
 
-            <strong className="text-gray-200 text-left mt-5 block">
+            <strong className={classNames('text-left mt-5 block', {
+              'text-white': isActiveLesson,
+              'text-gray-200': !isActiveLesson,
+            })}>
               {title}
             </strong>
           </div>

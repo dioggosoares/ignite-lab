@@ -10,19 +10,37 @@ body {
 
 #listLessons {
   a {
-    &.active {
-      @apply text-white bg-green-500;
-    }
-
-    &.active::before {
-      position: absolute;
-      content: "";
-      transform: rotate(90deg);
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-top: 12px solid #00875f;
-      margin-top: 3.9375rem;
-      margin-left: -0.9375rem;
+    #infoLink {
+      &.active {
+        @apply text-white bg-green-500;
+      }
+  
+      &.active::before {
+        @apply content-[''] absolute w-[.8125rem] h-[.8125rem] bg-green-500 rotate-45 mt-12 -mr-2 left-[4.5%] xl:left-[5.4%] lg:left-[1.9%] md:left-[2.5%];
+      }
     }
   }
+}
+
+// SCROLL CUSTOM
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f0f3f3;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #009e81;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #009e81;
 }
