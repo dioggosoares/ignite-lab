@@ -1,27 +1,16 @@
-import { gql, useQuery } from "@apollo/client"
 import { useNavigate, useParams } from "react-router-dom"
+
+// IMPORT GRAPHQL CODE
+import { useGetSlugQuery } from "../graphql/generated"
+
+// IMPORT COMPONENTS
 import { Footer } from "../components/Footer"
 import { Header } from "../components/Header"
 import { Sidebar } from "../components/Sidebar"
 import { Video } from "../components/Video"
 
-const GET_SLUG_QUERY = gql`
-  query LessonsList {
-    lessons(orderBy: createdAt_ASC, stage: PUBLISHED) {
-      id
-      slug
-    }
-  }
-`
-interface GetSlugQueryResponse {
-  lessons: {
-    id: string;
-    slug: string;
-  }[]
-}
-
 export function Classroom() {
-  const { data } = useQuery<GetSlugQueryResponse>(GET_SLUG_QUERY)
+  const { data } = useGetSlugQuery()
 
   const { slugParam } = useParams<{ slugParam: string }>()
   const navigate = useNavigate()

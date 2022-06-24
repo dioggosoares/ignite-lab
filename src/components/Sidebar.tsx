@@ -1,32 +1,15 @@
-import { gql, useQuery } from "@apollo/client";
+// IMPORT GRAPHQL CODE
+import { useGetLessonsQuery } from '../graphql/generated';
+
+// IMPORT COMPONENTS
 import { Lesson } from "./Lesson";
 
-const GET_LESSONS_QUERY = gql`
-  query LessonsList {
-    lessons(orderBy: availableAt_ASC, stage: PUBLISHED) {
-      id
-      lessonType
-      availableAt
-      title
-      slug
-    }
-  }
-`
-interface GetLessonsQueryResponse {
-  lessons: {
-    id: string;
-    title: string;
-    slug: string;
-    availableAt: string;
-    lessonType: 'live' | 'class';
-  }[]
-}
-
 export function Sidebar() {
-  const { data } = useQuery<GetLessonsQueryResponse>(GET_LESSONS_QUERY)
+  const { data } = useGetLessonsQuery()
 
   return (
-    <aside className="relative w-full xl:w-[21.75rem] h-[calc(100vh-6.25rem)] 1xl:h-[calc(100vh-28.875rem)] overflow-auto bg-gray-700 p-6 border-l border-gray-600">
+    <aside className="relative w-full xl:w-[21.75rem] h-[calc(100vh-6.25rem)] 1xl:h-[calc(100vh-28.875rem)] overflow-auto 1xl:overflow-auto p-6 bg-gray-700 border-l border-gray-600
+    scrollbar-none">
       <span className="font-bold text-2xl pb-6 mb-6 border-b border-gray-500 block">
         Cronograma de aulas
       </span>
