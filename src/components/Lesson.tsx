@@ -57,24 +57,27 @@ export function Lesson({ title, slug, availableAt, type }: LessonsProps) {
           </div>
         </NavLink>
       ) : (
-        <a href="#" className="rounded-md border border-gray-500 cursor-not-allowed mb-8 mt-2 hover:not:border-green-500 focus:outline-none opacity-30">
-          <div className="p-4">
-            <header className="flex items-center justify-between">
-              <span className="flex items-center gap-2 text-sm text-orange-500 font-medium">
-                <Lock size={20} />
-                Em breve
-              </span>
+        <div className="cursor-not-allowed rounded-md border border-gray-500 mb-6 mt-2 hover:not:border-green-500 focus:outline-none opacity-30">
+          <a href="#" className="pointer-events-none">
+            <div className="p-4">
+              <header className="flex items-center justify-between">
+                <span className="flex items-center gap-2 text-sm text-orange-500 font-medium">
+                  <Lock size={20} />
+                  Em breve
+                </span>
 
-              <span className="text-xs rounded py-[.125rem] px-2 text-white border border-green-300">
-                {type === 'live' ? 'AO VIVO' : 'AULA PRÁTICA'}
-              </span>
-            </header>
+                <span className="text-xs rounded py-[.125rem] px-2 text-white border border-green-300">
+                  {type === 'live' ? 'AO VIVO' : 'AULA PRÁTICA'}
+                </span>
+              </header>
 
-            <strong className="text-gray-200 text-left mt-5 block">
-              {title}
-            </strong>
-          </div>
-        </a>
+              <strong className="text-gray-200 text-left mt-5 block">
+                {title}
+              </strong>
+            </div>
+          </a>
+        </div>
+
       )}
     </>
   )

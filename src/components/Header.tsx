@@ -8,7 +8,7 @@ export function Header() {
   const [toggleMenu, setToggleMenu] = useState(false)
 
   return (
-    <header className="z-[100] fixed xl:static w-full flex flex-row items-center justify-between xl:justify-center py-5 px-6 bg-gray-700 border-b border-gray-600">
+    <header className="z-[100] fixed w-full flex flex-row items-center justify-between xl:justify-center py-5 px-6 bg-gray-700 border-b border-gray-600">
       <Logo width={200} height={34} />
       <div className="xl:hidden flex flex-row items-center gap-2">
         <span className="text-sm text-gray-100">Aulas</span>

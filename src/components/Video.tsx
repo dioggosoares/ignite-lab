@@ -89,7 +89,8 @@ export function Video({ lessonSlug }: VideoProps) {
         </header>
 
         <footer className="gap-8 mt-20 flex flex-wrap lg:flex-wrap xl:grid xl:grid-cols-2">
-          <a href="" className="flex bg-gray-700 rounded overflow-hidden items-stretch gap-6 hover:bg-gray-600 transitions-colors duration-500 ease-in-out">
+          <a href="" className="flex w-full xl:w-auto bg-gray-700 rounded overflow-hidden items-stretch gap-6 hover:bg-gray-600 border-2 border-green-500 border-opacity-0
+          hover:-translate-y-2 hover:border-opacity-100 transitions-all duration-500 ease-in-out">
             <div className="flex p-6 h-full items-center bg-green-500">
               <FileArrowDown size={40} />
             </div>
@@ -102,7 +103,8 @@ export function Video({ lessonSlug }: VideoProps) {
             </div>
           </a>
 
-          <a href="" className="flex bg-gray-700 rounded overflow-hidden items-stretch gap-6 hover:bg-gray-600 transitions-colors duration-500 ease-in-out">
+          <a href="" className="flex w-full xl:w-auto bg-gray-700 rounded overflow-hidden items-stretch gap-6 hover:bg-gray-600 border-2 border-green-500 border-opacity-0
+          hover:-translate-y-2 hover:border-opacity-100 transitions-all duration-500 ease-in-out">
             <div className="flex p-6 h-full items-center bg-green-500">
               <ImageSquare size={40} />
             </div>
