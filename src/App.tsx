@@ -1,5 +1,6 @@
 import { ApolloProvider } from "@apollo/client"
 import { BrowserRouter } from "react-router-dom"
+import { ToastContainer } from 'react-toastify';
 
 // IMPORT ROUTER
 import { Router } from "./Router"
@@ -12,6 +13,12 @@ function App() {
     <ApolloProvider client={client}>
       <BrowserRouter>
         <Router />
+        <ToastContainer
+          progressClassName="toastProgress"
+          bodyClassName="toastBody"
+          closeButton={false}
+          position="top-left"
+        />
       </BrowserRouter>
     </ApolloProvider>
   )

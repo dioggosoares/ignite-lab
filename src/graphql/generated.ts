@@ -5574,7 +5574,14 @@ export type CreateSubscriberMutationVariables = Exact<{
 }>;
 
 
-export type CreateSubscriberMutation = { __typename?: 'Mutation', createSubscriber?: { __typename?: 'Subscriber', id: string } | null };
+export type CreateSubscriberMutation = { __typename?: 'Mutation', createSubscriber?: { __typename?: 'Subscriber', id: string, email: string } | null };
+
+export type PublishSubscriberMutationVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type PublishSubscriberMutation = { __typename?: 'Mutation', publishSubscriber?: { __typename?: 'Subscriber', id: string } | null };
 
 export type GetLessonBySlugQueryVariables = Exact<{
   slug?: InputMaybe<Scalars['String']>;
@@ -5598,6 +5605,7 @@ export const CreateSubscriberDocument = gql`
     mutation CreateSubscriber($name: String!, $email: String!) {
   createSubscriber(data: {name: $name, email: $email}) {
     id
+    email
   }
 }
     `;
@@ -5628,6 +5636,39 @@ export function useCreateSubscriberMutation(baseOptions?: Apollo.MutationHookOpt
 export type CreateSubscriberMutationHookResult = ReturnType<typeof useCreateSubscriberMutation>;
 export type CreateSubscriberMutationResult = Apollo.MutationResult<CreateSubscriberMutation>;
 export type CreateSubscriberMutationOptions = Apollo.BaseMutationOptions<CreateSubscriberMutation, CreateSubscriberMutationVariables>;
+export const PublishSubscriberDocument = gql`
+    mutation PublishSubscriber($email: String!) {
+  publishSubscriber(where: {email: $email}, to: PUBLISHED) {
+    id
+  }
+}
+    `;
+export type PublishSubscriberMutationFn = Apollo.MutationFunction<PublishSubscriberMutation, PublishSubscriberMutationVariables>;
+
+/**
+ * __usePublishSubscriberMutation__
+ *
+ * To run a mutation, you first call `usePublishSubscriberMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `usePublishSubscriberMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [publishSubscriberMutation, { data, loading, error }] = usePublishSubscriberMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function usePublishSubscriberMutation(baseOptions?: Apollo.MutationHookOptions<PublishSubscriberMutation, PublishSubscriberMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<PublishSubscriberMutation, PublishSubscriberMutationVariables>(PublishSubscriberDocument, options);
+      }
+export type PublishSubscriberMutationHookResult = ReturnType<typeof usePublishSubscriberMutation>;
+export type PublishSubscriberMutationResult = Apollo.MutationResult<PublishSubscriberMutation>;
+export type PublishSubscriberMutationOptions = Apollo.BaseMutationOptions<PublishSubscriberMutation, PublishSubscriberMutationVariables>;
 export const GetLessonBySlugDocument = gql`
     query GetLessonBySlug($slug: String) {
   lesson(where: {slug: $slug}) {

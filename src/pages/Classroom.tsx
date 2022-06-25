@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
 // IMPORT GRAPHQL CODE
@@ -17,9 +18,11 @@ export function Classroom() {
 
   const slug = data?.lessons[0].slug
 
-  if (!slugParam) {
-    navigate(`/classroom/lesson/${slug}`)
-  }
+  useEffect(() => {
+    if (!slugParam) {
+      navigate(`/classroom/lesson/${slug}`)
+    }
+  }, [])
 
   return (
     <div className="flex flex-col min-h-screen">

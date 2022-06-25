@@ -1,9 +1,13 @@
-import { gql, useMutation } from "@apollo/client";
-import { FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { gql, useMutation } from "@apollo/client";
+import { toast } from "react-toastify";
+
+// IMPORT CSS
+import "react-toastify/dist/ReactToastify.css";
 
 // IMPORT GRAPHQL CODE
-import { useCreateSubscriberMutation } from "../graphql/generated";
+import { useCreateSubscriberMutation, usePublishSubscriberMutation } from "../graphql/generated";
 
 // IMPORT COMPONENTS
 import { Footer } from "../components/Footer";
@@ -16,23 +20,75 @@ import codeMockup from '../assets/code-mockup.png';
 export function Subscribe() {
   const navigate = useNavigate()
 
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
+  const [createSubscriber, { loading, error }] = useCreateSubscriberMutation()
+  const [publishSubscriber, { error: publishError }] = usePublishSubscriberMutation()
 
-  const [ createSubscriber, { loading } ] = useCreateSubscriberMutation()
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [formData, setFormData] = useState<{ name: string; email: string }>({
+    name: '',
+    email: ''
+  });
 
-  async function handleSubscribe(e: FormEvent) {
-    e.preventDefault();
+  const [formErrors, setFormErrors] = useState<{ name: boolean; email: boolean }>({
+    name: false,
+    email: false
+  });
 
-    await createSubscriber({
+  const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = evt.target;
+
+    if (formErrors[name as 'name' | 'email']) {
+      setFormErrors((prevState) => ({
+        ...prevState,
+        [name]: false
+      }));
+    }
+
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value
+    }));
+  }
+
+  async function handleSubscribe(evt: FormEvent) {
+    evt.preventDefault();
+
+    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(formData.email)) {
+      setFormErrors((prevState) => ({ ...prevState, email: true }))
+      toast("Esse é um email válido 🤔?", {type: "warning"});
+      return
+    }
+
+    const subscriberData = await createSubscriber({
       variables: {
-        name,
-        email,
+        name: formData.name,
+        email: formData.email
       }
     })
 
-    navigate('/classroom')
+    if (subscriberData) {
+      const publishedData = await publishSubscriber({
+        variables: {
+          email: formData.email
+        }
+      });
+
+      if ((error || publishError) && publishedData) {
+        toast(error ? error.message : publishError?.message + " 😮‍💨", {type: "error"})
+        setIsSuccess(false)
+      } else {
+        setFormErrors({email: false, name: false});
+        setIsSuccess(true)
+        toast("Sua vaga está garantida 🥳", {type: "success"});
+      }
+    }
   }
+
+  useEffect(() => {
+    if((!error || !publishError) && isSuccess) {
+      navigate('/classroom')
+    }
+  }, [isSuccess])
 
   return (
     <main className="flex flex-1 flex-col items-center justify-between min-h-screen bg-blur bg-cover bg-no-repeat">
@@ -57,7 +113,8 @@ export function Subscribe() {
               hover:border-green-300 transition-all duration-500 ease-in-out"
               type="text"
               placeholder="Seu nome completo"
-              onChange={(e) => setName(e.target.value)}
+              onChange={handleChange}
+              name="name"
               required
             />
             <input
@@ -66,8 +123,9 @@ export function Subscribe() {
               focus:invalid:border-red-500 focus:invalid:ring-red-500"
               type="email"
               placeholder="Digite seu e-mail"
-              onChange={(e) => setEmail(e.target.value)}
-              required
+              onChange={handleChange}
+              name="email"
+              // required
             />
 
             <button
