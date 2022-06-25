@@ -33,7 +33,7 @@ export function Video({ lessonSlug }: VideoProps) {
   }
 
   return (
-    <div id="classContent" className="flex-1 mt-[4.6875rem] xl:mt-0">
+    <div id="classContent" className="flex-1 mt-[4.6875rem]">
       <div id="videoBox" className="bg-black flex justify-center">
         <div className="w-full h-full max-w-[68.75rem] max-h-[60vh] aspect-video">
           <Player>
