@@ -22,17 +22,6 @@ export function Classroom() {
     navigate(`/classroom/lesson/${slug}`)
   }
 
-  // if(slug !== undefined) {
-  //   slugParam = slug
-  //   console.log(slugParam)
-  // }
-
-  // useEffect(() => {
-  //   if (!slugParam) {
-  //     navigate(`/classroom/lesson/${slug}`)
-  //   }
-  // }, [])
-
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
