@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
 // IMPORT GRAPHQL CODE
@@ -13,16 +13,25 @@ import { Video } from "../components/Video"
 export function Classroom() {
   const { data } = useGetSlugQuery()
 
-  const { slugParam } = useParams<{ slugParam: string }>()
+  let { slugParam } = useParams<{ slugParam: string }>()
   const navigate = useNavigate()
 
   const slug = data?.lessons[0].slug
 
-  useEffect(() => {
-    if (!slugParam) {
-      navigate(`/classroom/lesson/${slug}`)
-    }
-  }, [])
+  if (!slugParam) {
+    navigate(`/classroom/lesson/${slug}`)
+  }
+
+  // if(slug !== undefined) {
+  //   slugParam = slug
+  //   console.log(slugParam)
+  // }
+
+  // useEffect(() => {
+  //   if (!slugParam) {
+  //     navigate(`/classroom/lesson/${slug}`)
+  //   }
+  // }, [])
 
   return (
     <div className="flex flex-col min-h-screen">
