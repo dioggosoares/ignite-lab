@@ -20,13 +20,13 @@ export function Header() {
         }
       </div>
       {toggleMenu ? (
-        <div className="z-[100] xl:hidden fixed top-[4.6875rem] right-0 w-full h-full bg-gray-700 translate-x-0 transition-all duration-150 ease-in-out">
+        <div className="z-[100] xl:hidden fixed top-[4.6875rem] right-0 w-full h-full bg-gray-700 translate-x-0 transition-all duration-500 ease-in-out">
           <nav id="mobileNavbar" className="flex flex-col w-full">
             <Sidebar />
           </nav>
         </div>
       ) : (
-        <div className="z-[100] xl:hidden fixed top-[4.6875rem] right-0 w-full h-full bg-gray-700 translate-x-full transition-all duration-150 ease-in-out">
+        <div className="z-[100] xl:hidden fixed top-[4.6875rem] right-0 w-full h-full bg-gray-700 translate-x-full transition-all duration-500 ease-in-out">
           <nav id="mobileNavbar" className="flex flex-col w-full">
             <Sidebar />
           </nav>
