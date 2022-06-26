@@ -3,26 +3,26 @@
 </div>
 <br />
 
-## 🛠 Skills
-
-![react][react] ![graphql][graphql] ![apollo client][apollo] ![sass][sass] ![tailwind css][tailwind] ![vite][vite]
-
-## 📄 Description
+## 📄 Descrição
 
 Projeto desenvolvido durante o evento IgniteLab da Rocketseat 🚀.
 Projeto de plataforma de e-learning feito com ReactJS, GraphQL, GraphCMS e Tailwind
 
-## 🌐 Live Version
+## 🌎 Versão Ao Vivo
 
 [![vercel](https://img.shields.io/badge/vercel-000?style=for-the-badge&logo=vercel&logoColor=white)](https://ignite-lab-delta.vercel.app/)
 
-## 🌠 Screenshots
+## 🛠 Technologies
+
+![react][react] ![graphql][graphql] ![apollo client][apollo] ![sass][sass] ![tailwind css][tailwind] ![vite][vite]
+
+## 📷 Screenshots
 
 <img src="public/media/mockups/print_home.png" alt="home" />
 
 <img src="public/media/mockups/print_classroom.png" alt="Event (No Lesson)" />
 
-## 🔗 More About Me
+## 🦾 Sobre mim
 
 [
 ![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)
