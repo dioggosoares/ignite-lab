@@ -1,4 +1,4 @@
-import { Link, NavLink, useParams } from 'react-router-dom'
+import { useNavigate, NavLink, useParams } from 'react-router-dom'
 import { isPast, format } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
 import { CheckCircle, Lock } from 'phosphor-react'
@@ -17,6 +17,8 @@ export function Lesson({ title, slug, availableAt, type }: LessonsProps) {
     locale: ptBR,
   })
 
+  const navigate = useNavigate()
+
   const isActiveLesson = slugParam === slug
 
   return (
@@ -24,20 +26,32 @@ export function Lesson({ title, slug, availableAt, type }: LessonsProps) {
       <span className="text-gray-300">
         {availableDateFormat}
       </span>
-      {isLessonAvailable ? (
-        <NavLink to={`/classroom/lesson/${slug}`} className="group">
-          <div id="infoLink" className={classNames('rounded-md border border-gray-500 cursor-pointer p-4 mb-8 mt-2 group-hover:border-green-500', {
+      <div className={classNames("group", {
+          'cursor-not-allowed': !isLessonAvailable
+        })}>
+        <NavLink to={`/classroom/lesson/${slug}`}  className={classNames("group", {
+          'pointer-events-none opacity-30 hover:not:border-green-500': !isLessonAvailable
+        })}>
+          <div id="infoLink" className={classNames('rounded-md border border-gray-500 cursor-pointer p-4 mb-8 mt-2', {
             'bg-green-500': isActiveLesson,
-            'active': isActiveLesson
+            'group-hover:border-green-500': isLessonAvailable,
+            'tooltipArrow': isActiveLesson,
           })}>
             <header className="flex items-center justify-between">
-              <span className={classNames('flex items-center gap-2 text-sm font-medium', {
-                'text-white': isActiveLesson,
-                'text-blue-500': !isActiveLesson,
-              })}>
-                <CheckCircle size={20} />
-                Conteúdo liberado
-              </span>
+              {isLessonAvailable ? (
+                <span className={classNames('flex items-center gap-2 text-sm font-medium', {
+                  'text-white': isActiveLesson,
+                  'text-blue-500': !isActiveLesson,
+                })}>
+                  <CheckCircle size={20} />
+                  Conteúdo liberado
+                </span>
+              ) : (
+                <span className="flex items-center gap-2 text-sm text-orange-500 font-medium">
+                  <Lock size={20} />
+                  Em breve
+                </span>
+              )}
 
               <span className={classNames('text-xs rounded py-[.125rem] px-2 text-white border', {
                 'border-white': isActiveLesson,
@@ -55,29 +69,7 @@ export function Lesson({ title, slug, availableAt, type }: LessonsProps) {
             </strong>
           </div>
         </NavLink>
-      ) : (
-        <div className="cursor-not-allowed rounded-md border border-gray-500 mb-6 mt-2 hover:not:border-green-500 focus:outline-none opacity-30">
-          <a href="#" className="pointer-events-none">
-            <div className="p-4">
-              <header className="flex items-center justify-between">
-                <span className="flex items-center gap-2 text-sm text-orange-500 font-medium">
-                  <Lock size={20} />
-                  Em breve
-                </span>
-
-                <span className="text-xs rounded py-[.125rem] px-2 text-white border border-green-300">
-                  {type === 'live' ? 'AO VIVO' : 'AULA PRÁTICA'}
-                </span>
-              </header>
-
-              <strong className="text-gray-200 text-left mt-5 block">
-                {title}
-              </strong>
-            </div>
-          </a>
-        </div>
-
-      )}
+      </div>
     </>
   )
 }

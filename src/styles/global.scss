@@ -43,12 +43,12 @@ body {
 #listLessons {
   a {
     #infoLink {
-      &.active {
+      &.tooltipArrow {
         @apply text-white bg-green-500;
       }
 
-      &.active::before {
-        @apply content-[''] absolute w-[.8125rem] h-[.8125rem] bg-green-500 rotate-45 mt-12 -mr-2 left-[4.5%] 4xl:left-[5.4%] 3xl:left-[5.4%] 1xl:left-[5.4%] 0.5xl:left-[5.4%] xl:left-[5.4%] tablet:left-[1.5%] lg:left-[1.9%] md:left-[2.5%];
+      &.tooltipArrow::before {
+        @apply content-[''] absolute w-[.8125rem] h-[.8125rem] bg-green-500 rotate-45 mt-12 -mr-2 left-[4.5%] 4xl:left-[5.4%] 3xl:left-[5.4%] 1xl:left-[5.4%] 0xl:left-[1.4%] xl:left-[5.4%] tablet:left-[1.5%] lg:left-[1.9%] md:left-[2.5%];
       }
     }
   }

@@ -35,7 +35,7 @@ export function Classroom() {
             <Footer />
           </section>
         </section>
-        <section id="cronograma" className="hidden xl:flex flex-initial bg-gray-700">
+        <section id="cronograma" className="hidden 1xl:flex flex-initial bg-gray-700">
           <Sidebar />
         </section>
       </main>

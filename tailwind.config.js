@@ -43,8 +43,8 @@ module.exports = {
       },
       screens: {
         'tablet': '1200px',
+        '0xl': '1360px',
         '1xl': '1440px',
-        '0.5xl': '1360px',
         '3xl': '1920px',
         '4xl': '2560px',
       },
