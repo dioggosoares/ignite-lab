@@ -14,7 +14,7 @@ Projeto de plataforma de e-learning feito com ReactJS, GraphQL, GraphCMS e Tailw
 
 ## 🛠 Technologies
 
-![react][react] ![graphql][graphql] ![apollo client][apollo] ![sass][sass] ![tailwind css][tailwind] ![vite][vite]
+![react][react] ![vite][vite] ![tailwind css][tailwind] ![sass][sass] ![graphql][graphql] ![apollo client][apollo]
 
 ## 📷 Screenshots
 
