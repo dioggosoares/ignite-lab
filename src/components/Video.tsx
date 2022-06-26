@@ -28,12 +28,13 @@ export function Video({ lessonSlug }: VideoProps) {
   return (
     <div id="classContent" className="flex-1 mt-[4.6875rem]">
       <div id="videoBox" className="bg-black flex justify-center">
-        <div className="w-full h-full max-w-[68.75rem] max-h-[60vh] aspect-video">
+        <div className="w-full h-full max-w-[68.75rem] max-h-[100vh] aspect-video">
           <iframe
             className="w-full h-full"
             src={`https://youtube.com/embed/${data.lesson.videoId}?color=white`}
             frameBorder="0"
             allowFullScreen={true}
+            allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
           />
         </div>
       </div>
