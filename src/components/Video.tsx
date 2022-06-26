@@ -1,12 +1,10 @@
-import { RingLoader } from 'react-spinners';
-import { DefaultUi, Player, Youtube } from '@vime/react'
 import { CaretRight, DiscordLogo, FileArrowDown, ImageSquare, Lightning } from "phosphor-react"
 
 // IMPORT GRAPHQL CODE
-import { useGetLessonBySlugQuery } from '../graphql/generated';
+import { useGetLessonBySlugQuery } from '../graphql/generated'
 
-// IMPORT VIME CSS
-import '@vime/core/themes/default.css'
+// IMPORT COMPONENTS
+import { RingLoad } from './Loading'
 
 interface VideoProps {
   lessonSlug: string;
@@ -22,12 +20,7 @@ export function Video({ lessonSlug }: VideoProps) {
   if (!data || !data.lesson) {
     return (
       <div id="classContent" className="flex flex-1 mx-auto items-center justify-center mt-[4.6875rem] md:mt-0">
-        <RingLoader
-          color="#81D8F7"
-          loading={true}
-          size={100}
-          speedMultiplier={2}
-        />
+        <RingLoad />
       </div>
     )
   }
@@ -36,13 +29,12 @@ export function Video({ lessonSlug }: VideoProps) {
     <div id="classContent" className="flex-1 mt-[4.6875rem]">
       <div id="videoBox" className="bg-black flex justify-center">
         <div className="w-full h-full max-w-[68.75rem] max-h-[60vh] aspect-video">
-          <Player>
-            <Youtube
-              key={data.lesson.videoId}
-              videoId={data.lesson.videoId}
-            />
-            <DefaultUi />
-          </Player>
+          <iframe
+            className="w-full h-full"
+            src={`https://youtube.com/embed/${data.lesson.videoId}?color=white`}
+            frameBorder="0"
+            allowFullScreen={true}
+          />
         </div>
       </div>
 

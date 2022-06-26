@@ -1,3 +1,4 @@
+import { RingLoader } from 'react-spinners';
 interface LoadingWithMessageProps {
   message: string;
 }
@@ -27,4 +28,17 @@ export function LoadingWithMessage({ message }: LoadingWithMessageProps) {
       <p className="text-lg text-center px-2">{message}</p>
     </>
   );
+}
+
+export function RingLoad() {
+  return (
+    <div id="classContent" className="flex flex-1 mx-auto items-center justify-center mt-[4.6875rem] md:mt-0">
+      <RingLoader
+        color="#81D8F7"
+        loading={true}
+        size={100}
+        speedMultiplier={2}
+      />
+    </div>
+  )
 }
