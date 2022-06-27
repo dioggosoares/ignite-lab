@@ -5595,11 +5595,6 @@ export type GetLessonsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetLessonsQuery = { __typename?: 'Query', lessons: Array<{ __typename?: 'Lesson', id: string, lessonType: LessonType, availableAt?: any | null, title: string, slug: string }> };
 
-export type GetSlugQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetSlugQuery = { __typename?: 'Query', lessons: Array<{ __typename?: 'Lesson', id: string, slug: string }> };
-
 
 export const CreateSubscriberDocument = gql`
     mutation CreateSubscriber($name: String!, $email: String!) {
@@ -5749,38 +5744,3 @@ export function useGetLessonsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type GetLessonsQueryHookResult = ReturnType<typeof useGetLessonsQuery>;
 export type GetLessonsLazyQueryHookResult = ReturnType<typeof useGetLessonsLazyQuery>;
 export type GetLessonsQueryResult = Apollo.QueryResult<GetLessonsQuery, GetLessonsQueryVariables>;
-export const GetSlugDocument = gql`
-    query GetSlug {
-  lessons(orderBy: createdAt_ASC, stage: PUBLISHED) {
-    id
-    slug
-  }
-}
-    `;
-
-/**
- * __useGetSlugQuery__
- *
- * To run a query within a React component, call `useGetSlugQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetSlugQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetSlugQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetSlugQuery(baseOptions?: Apollo.QueryHookOptions<GetSlugQuery, GetSlugQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetSlugQuery, GetSlugQueryVariables>(GetSlugDocument, options);
-      }
-export function useGetSlugLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetSlugQuery, GetSlugQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetSlugQuery, GetSlugQueryVariables>(GetSlugDocument, options);
-        }
-export type GetSlugQueryHookResult = ReturnType<typeof useGetSlugQuery>;
-export type GetSlugLazyQueryHookResult = ReturnType<typeof useGetSlugLazyQuery>;
-export type GetSlugQueryResult = Apollo.QueryResult<GetSlugQuery, GetSlugQueryVariables>;

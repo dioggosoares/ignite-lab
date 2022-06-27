@@ -1,6 +1,0 @@
-query GetSlug {
-  lessons(orderBy: createdAt_ASC, stage: PUBLISHED) {
-    id
-    slug
-  }
-}

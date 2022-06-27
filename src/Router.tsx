@@ -1,6 +1,9 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { Classroom } from './pages/Classroom';
 import { Subscribe } from './pages/Subscribe';
+
+// IMPORT GRAPHQL CODE
+import { useGetLessonsQuery } from './graphql/generated';
 
 export function Router() {
   return (
